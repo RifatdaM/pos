@@ -25,11 +25,9 @@ function App() {
             <div className="border border-gray-400 rounded flex flex-col min-h-[calc(100vh-112px)] ">
               <Customers />
 
-              {/* Auto height area */}
-              <div className="p-4 flex-1 flex flex-col items-center  overflow-y-auto">
-                <p className="text-cyan-600">Products Info</p>
-                <img src="/src/assets/one.jpg" alt="" className="h-50 w-70" />
-                <img src="/src/assets/two.jpg" alt="" className="h-50 w-70" />
+              {/* Empty cart area */}
+              <div className="p-4 flex-1  overflow-y-auto">
+                <p>Empty cart area here</p>
               </div>
 
               <Summary />
