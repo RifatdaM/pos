@@ -14,6 +14,7 @@ const Products = () => {
       stock: 45,
       category: "Dairy",
       image: null,
+      brand: "DairyPure1",
     },
     {
       id: 2,
@@ -24,6 +25,7 @@ const Products = () => {
       stock: 30,
       category: "Bakery",
       image: null,
+      brand: "DairyPure2",
     },
     {
       id: 3,
@@ -34,6 +36,7 @@ const Products = () => {
       stock: 100,
       category: "Grocery",
       image: null,
+      brand: "DairyPure3",
     },
   ]);
 
@@ -110,7 +113,7 @@ const Products = () => {
           </div>
         ) : viewMode === "grid" ? (
           /* Grid View - Responsive */
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-6 gap-2">
             {scannedProducts.map((product) => (
               <button
                 key={product.id}
@@ -119,7 +122,7 @@ const Products = () => {
                 aria-label={`Add ${product.name} to cart`}
               >
                 {/* Product Image Placeholder */}
-                <div className="w-full aspect-square bg-gray-100 rounded-md mb-2 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
+                <div className="w-full aspect-square bg-gray-100 rounded-md mb-2 flex items-center justify-center group-hover:bg-blue-50 transition-colors aspect-square">
                   <svg
                     className="w-8 h-8 text-gray-300 group-hover:text-blue-300"
                     fill="none"
@@ -138,27 +141,21 @@ const Products = () => {
 
                 {/* Product Info */}
                 <div>
-                  <p className="text-xs text-gray-500 mb-0.5">{product.category}</p>
+                  <p className="text-xs text-gray-500 mb-0.5">{product.brand}</p>
                   <h4 className="text-sm font-medium text-gray-900 line-clamp-2 mb-1">
                     {product.name}
                   </h4>
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-semibold text-blue-600">৳{product.price.toFixed(2)}</span>
-                    <span className={`text-xs ${product.stock > 10 ? "text-green-600" : "text-amber-600"}`}>
+                   
+                  </div>
+                   <span className={`text-xs ${product.stock > 10 ? "text-green-600" : "text-amber-600"}`}>
                       {product.stock} in stock
                     </span>
-                  </div>
                 </div>
 
                 {/* Quick Add Overlay */}
-                <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="flex items-center justify-center gap-1 w-full py-1.5 bg-blue-600 text-white text-xs font-medium rounded-md">
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                    </svg>
-                    Add to Cart
-                  </span>
-                </div>
+                
               </button>
             ))}
           </div>
