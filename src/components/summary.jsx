@@ -3,8 +3,8 @@ import React, { useState } from "react";
 const Summary = ({ cartTotal = 0 }) => {
   const [discount, setDiscount] = useState(0);
   const [couponCode, setCouponCode] = useState("");
-  const [taxPercent, setTaxPercent] = useState(0);
-  const [shippingMethod, setShippingMethod] = useState("");
+  const [taxPercent] = useState(0);
+  const [shippingMethod] = useState("");
   const [sendSms, setSendSms] = useState(true);
   const [showDetails, setShowDetails] = useState(false);
   const [paymentMethods, setPaymentMethods] = useState([
@@ -13,7 +13,8 @@ const Summary = ({ cartTotal = 0 }) => {
 
   // Calculations
   const couponDiscount = 0;
-  const shippingCharge = shippingMethod === "city" ? 50 : shippingMethod === "outside" ? 100 : 0;
+  const shippingCharge =
+    shippingMethod === "city" ? 50 : shippingMethod === "outside" ? 100 : 0;
   const subtotal = cartTotal - discount - couponDiscount;
   const taxAmount = (subtotal * taxPercent) / 100;
   const grandTotal = subtotal + shippingCharge + taxAmount;
@@ -25,7 +26,10 @@ const Summary = ({ cartTotal = 0 }) => {
   };
 
   const addPaymentMethod = () => {
-    setPaymentMethods([...paymentMethods, { method: "cash", amount: 0, transactionId: "" }]);
+    setPaymentMethods([
+      ...paymentMethods,
+      { method: "cash", amount: 0, transactionId: "" },
+    ]);
   };
 
   const removePaymentMethod = (index) => {
@@ -34,7 +38,10 @@ const Summary = ({ cartTotal = 0 }) => {
     }
   };
 
-  const totalPaid = paymentMethods.reduce((sum, pm) => sum + Number(pm.amount), 0);
+  const totalPaid = paymentMethods.reduce(
+    (sum, pm) => sum + Number(pm.amount),
+    0
+  );
   const changeAmount = totalPaid - grandTotal;
 
   return (
@@ -49,16 +56,26 @@ const Summary = ({ cartTotal = 0 }) => {
         >
           <span className="flex items-center gap-1">
             <svg
-              className={`w-3 h-3 transition-transform ${showDetails ? "rotate-180" : ""}`}
+              className={`w-3 h-3 transition-transform ${
+                showDetails ? "rotate-180" : ""
+              }`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
             </svg>
             {showDetails ? "Hide" : "Show"} Details
           </span>
-          <label className="flex items-center gap-1.5 cursor-pointer" onClick={(e) => e.stopPropagation()}>
+          <label
+            className="flex items-center gap-1.5 cursor-pointer"
+            onClick={(e) => e.stopPropagation()}
+          >
             <input
               type="checkbox"
               checked={sendSms}
@@ -81,27 +98,34 @@ const Summary = ({ cartTotal = 0 }) => {
                 placeholder="Coupon code"
                 className="input flex-1 text-xs py-1.5 px-2"
               />
-              <button type="button" className="btn btn-outline text-xs py-1 px-2" disabled={!couponCode.trim()}>
+              <button
+                type="button"
+                className="btn btn-outline text-xs py-1 px-2"
+                disabled={!couponCode.trim()}
+              >
                 Apply
               </button>
             </div>
 
             {/* Discount & Tax Row */}
-            <div className="grid grid-cols-2 gap-2">
-              <div className="flex items-center justify-between">
-                <label className="text-gray-500">Discount</label>
-                <div className="flex items-center gap-1">
+            <div className="">
+              <div className="flex items-center w-full gap-4">
+                <label className="text-gray-500 whitespace-nowrap">
+                  Discount
+                </label>
+
+                <div className="flex items-center gap-1 flex-1">
                   <span className="text-gray-400">৳</span>
                   <input
                     type="number"
                     value={discount}
                     onChange={(e) => setDiscount(Number(e.target.value))}
-                    className="input w-16 text-right text-xs py-1 px-1.5"
+                    className="input w-full text-right text-xs py-1 px-1.5"
                     min="0"
                   />
                 </div>
               </div>
-              <div className="flex items-center justify-between">
+              {/* <div className="flex items-center justify-between">
                 <label className="text-gray-500">Tax</label>
                 <div className="flex items-center gap-1">
                   <input
@@ -114,11 +138,11 @@ const Summary = ({ cartTotal = 0 }) => {
                   />
                   <span className="text-gray-400">%</span>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Shipping Row */}
-            <div className="flex items-center justify-between">
+            {/* <div className="flex items-center justify-between">
               <label className="text-gray-500">Shipping</label>
               <select
                 value={shippingMethod}
@@ -129,7 +153,7 @@ const Summary = ({ cartTotal = 0 }) => {
                 <option value="city">City ৳50</option>
                 <option value="outside">Outside ৳100</option>
               </select>
-            </div>
+            </div> */}
           </div>
         )}
 
@@ -155,7 +179,9 @@ const Summary = ({ cartTotal = 0 }) => {
           {/* Grand Total Row */}
           <div className="flex items-center justify-between pt-2 border-t border-gray-200">
             <span className="text-sm font-bold text-gray-900">Grand Total</span>
-            <span className="text-lg font-bold text-blue-600 tabular-nums">৳{grandTotal.toFixed(2)}</span>
+            <span className="text-lg font-bold text-blue-600 tabular-nums">
+              ৳{grandTotal.toFixed(2)}
+            </span>
           </div>
         </div>
       </div>
@@ -170,7 +196,9 @@ const Summary = ({ cartTotal = 0 }) => {
                 <input
                   type="number"
                   value={pm.amount}
-                  onChange={(e) => updatePaymentMethod(index, "amount", e.target.value)}
+                  onChange={(e) =>
+                    updatePaymentMethod(index, "amount", e.target.value)
+                  }
                   placeholder="0.00"
                   className="input text-right text-2xl font-bold py-3 px-4 tabular-nums flex-1"
                   min="0"
@@ -184,18 +212,30 @@ const Summary = ({ cartTotal = 0 }) => {
                     className="text-red-400 hover:text-red-600 p-2"
                     aria-label="Remove payment"
                   >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     </svg>
                   </button>
                 )}
               </div>
-              
+
               {/* Payment Method and Transaction ID - Small Secondary Row */}
               <div className="flex items-center gap-2">
                 <select
                   value={pm.method}
-                  onChange={(e) => updatePaymentMethod(index, "method", e.target.value)}
+                  onChange={(e) =>
+                    updatePaymentMethod(index, "method", e.target.value)
+                  }
                   className="input select text-xs py-1.5 px-2 w-24"
                   aria-label="Payment method"
                 >
@@ -208,7 +248,13 @@ const Summary = ({ cartTotal = 0 }) => {
                   <input
                     type="text"
                     value={pm.transactionId}
-                    onChange={(e) => updatePaymentMethod(index, "transactionId", e.target.value)}
+                    onChange={(e) =>
+                      updatePaymentMethod(
+                        index,
+                        "transactionId",
+                        e.target.value
+                      )
+                    }
                     placeholder="Transaction ID"
                     className="input  w-1/2 text-xs py-1.5 px-2"
                     aria-label="Transaction ID"
@@ -224,8 +270,18 @@ const Summary = ({ cartTotal = 0 }) => {
             onClick={addPaymentMethod}
             className="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-0.5 mt-2"
           >
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            <svg
+              className="w-3 h-3"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 4v16m8-8H4"
+              />
             </svg>
             Add Payment
           </button>
@@ -235,8 +291,13 @@ const Summary = ({ cartTotal = 0 }) => {
         {totalPaid > 0 && (
           <div className="mt-2 pt-2 border-t border-gray-200 flex items-center justify-between text-xs">
             <span className="text-gray-500">Paid: ৳{totalPaid.toFixed(2)}</span>
-            <span className={`font-semibold ${changeAmount >= 0 ? "text-green-600" : "text-red-600"}`}>
-              {changeAmount >= 0 ? "Change" : "Due"}: ৳{Math.abs(changeAmount).toFixed(2)}
+            <span
+              className={`font-semibold ${
+                changeAmount >= 0 ? "text-green-600" : "text-red-600"
+              }`}
+            >
+              {changeAmount >= 0 ? "Change" : "Due"}: ৳
+              {Math.abs(changeAmount).toFixed(2)}
             </span>
           </div>
         )}
@@ -245,8 +306,18 @@ const Summary = ({ cartTotal = 0 }) => {
       {/* Action Buttons - Compact */}
       <div className="px-3 py-2 border-t border-gray-200 flex gap-2">
         <button type="button" className="btn btn-outline flex-1 py-2 text-xs">
-          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+            />
           </svg>
           Hold
         </button>
@@ -255,8 +326,18 @@ const Summary = ({ cartTotal = 0 }) => {
           className="btn btn-success flex-[2] py-2 text-sm font-semibold"
           disabled={grandTotal <= 0}
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
           </svg>
           Complete ৳{grandTotal.toFixed(2)}
         </button>

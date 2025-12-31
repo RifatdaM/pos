@@ -10,8 +10,20 @@ function App() {
   // Sample cart items - would be managed via state/context
   const [cartItems] = useState([
     { id: 1, name: "Fresh Milk 1L", price: 85.0, quantity: 2, sku: "MLK001" },
-    { id: 2, name: "White Bread Loaf", price: 55.0, quantity: 1, sku: "BRD001" },
-    { id: 3, name: "Rice 5kg Premium", price: 450.0, quantity: 1, sku: "RIC001" },
+    {
+      id: 2,
+      name: "White Bread Loaf",
+      price: 55.0,
+      quantity: 1,
+      sku: "BRD001",
+    },
+    {
+      id: 3,
+      name: "Rice 5kg Premium",
+      price: 450.0,
+      quantity: 1,
+      sku: "RIC001",
+    },
   ]);
 
   const updateQuantity = (id, delta) => {
@@ -23,7 +35,10 @@ function App() {
   };
 
   // Calculate cart total
-  const cartTotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const cartTotal = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   return (
     <>
@@ -34,7 +49,10 @@ function App() {
 
       <Topbar />
 
-      <main id="main-content" className="container mx-auto px-3 md:px-4 lg:px-6 py-3 md:py-4">
+      <main
+        id="main-content"
+        className=" mx-auto px-3 md:px-4 lg:px-6 py-3 md:py-4"
+      >
         <div className="flex flex-col lg:flex-row gap-3 md:gap-4">
           {/* Left Panel - Products & Search */}
           <div className="w-full lg:w-[58%] xl:w-[62%] space-y-3 md:space-y-4">
@@ -43,10 +61,13 @@ function App() {
           </div>
 
           {/* Right Panel - Cart & Checkout */}
-          <aside className="w-full lg:w-[42%] xl:w-[38%]" aria-label="Shopping cart">
+          <aside
+            className="w-full lg:w-[42%] xl:w-[38%]"
+            aria-label="Shopping cart"
+          >
             <div className="card lg:sticky lg:top-20 flex flex-col lg:max-h-[calc(100vh-6rem)]">
               {/* Customer Section */}
-              <Customers />
+              {/* <Customers /> */}
 
               {/* Cart Section */}
               <div className="flex flex-col min-h-0 flex-1">
@@ -112,7 +133,11 @@ function App() {
                         <p className="text-xs text-gray-500">Cart is empty</p>
                       </div>
                     ) : (
-                      <ul className="space-y-2" role="list" aria-label="Cart items">
+                      <ul
+                        className="space-y-2"
+                        role="list"
+                        aria-label="Cart items"
+                      >
                         {cartItems.map((item) => (
                           <li
                             key={item.id}
@@ -130,8 +155,18 @@ function App() {
                                   className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-red-500 flex-shrink-0"
                                   aria-label={`Remove ${item.name}`}
                                 >
-                                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                  <svg
+                                    className="w-3.5 h-3.5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M6 18L18 6M6 6l12 12"
+                                    />
                                   </svg>
                                 </button>
                               </div>
@@ -145,19 +180,41 @@ function App() {
                                     className="w-6 h-6 flex items-center justify-center bg-white border border-gray-300 rounded hover:bg-gray-50"
                                     aria-label="Decrease quantity"
                                   >
-                                    <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+                                    <svg
+                                      className="w-2.5 h-2.5"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M20 12H4"
+                                      />
                                     </svg>
                                   </button>
-                                  <span className="w-8 text-center text-xs font-medium">{item.quantity}</span>
+                                  <span className="w-8 text-center text-xs font-medium">
+                                    {item.quantity}
+                                  </span>
                                   <button
                                     type="button"
                                     onClick={() => updateQuantity(item.id, 1)}
                                     className="w-6 h-6 flex items-center justify-center bg-white border border-gray-300 rounded hover:bg-gray-50"
                                     aria-label="Increase quantity"
                                   >
-                                    <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                                    <svg
+                                      className="w-2.5 h-2.5"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M12 4v16m8-8H4"
+                                      />
                                     </svg>
                                   </button>
                                 </div>
@@ -181,8 +238,12 @@ function App() {
                 {cartItems.length > 0 && (
                   <div className="px-3 py-2 bg-blue-50 border-t border-blue-100 flex-shrink-0">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-blue-700">Cart Subtotal ({cartItems.length} items)</span>
-                      <span className="text-sm font-bold text-blue-700">৳{cartTotal.toFixed(2)}</span>
+                      <span className="text-xs text-blue-700">
+                        Cart Subtotal ({cartItems.length} items)
+                      </span>
+                      <span className="text-sm font-bold text-blue-700">
+                        ৳{cartTotal.toFixed(2)}
+                      </span>
                     </div>
                   </div>
                 )}
