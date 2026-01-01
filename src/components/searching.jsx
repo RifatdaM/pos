@@ -149,33 +149,7 @@ const Searching = () => {
         </div>
       </div>
 
-      {/* Quick Stats - Compact */}
-      <div className="flex flex-wrap gap-3 md:gap-4 mt-3 pt-3 border-t border-gray-100">
-        <div className="flex items-center gap-1.5 text-xs">
-          <span
-            className="w-1.5 h-1.5 bg-green-500 rounded-full"
-            aria-hidden="true"
-          ></span>
-          <span className="text-gray-500">Sales:</span>
-          <span className="font-semibold text-gray-800">৳12,450</span>
-        </div>
-        <div className="flex items-center gap-1.5 text-xs">
-          <span
-            className="w-1.5 h-1.5 bg-blue-500 rounded-full"
-            aria-hidden="true"
-          ></span>
-          <span className="text-gray-500">Txns:</span>
-          <span className="font-semibold text-gray-800">24</span>
-        </div>
-        <div className="flex items-center gap-1.5 text-xs">
-          <span
-            className="w-1.5 h-1.5 bg-amber-500 rounded-full"
-            aria-hidden="true"
-          ></span>
-          <span className="text-gray-500">Items:</span>
-          <span className="font-semibold text-gray-800">156</span>
-        </div>
-      </div>
+      
     </div>
   );
 };

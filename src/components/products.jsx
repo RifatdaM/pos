@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-
+import img1 from "../assets/one.jpg"
+import img2 from "../assets/two.jpg"
+import img3 from "../assets/three.jpg"
 const Products = () => {
   const [viewMode, setViewMode] = useState("grid"); // 'grid' or 'list'
 
@@ -13,7 +15,7 @@ const Products = () => {
       price: 85.0,
       stock: 45,
       category: "Dairy",
-      image: null,
+      image: img1,
       brand: "DairyPure1",
     },
     {
@@ -24,7 +26,7 @@ const Products = () => {
       price: 55.0,
       stock: 30,
       category: "Bakery",
-      image: null,
+      image: img2,
       brand: "DairyPure2",
     },
     {
@@ -35,7 +37,7 @@ const Products = () => {
       price: 450.0,
       stock: 100,
       category: "Grocery",
-      image: null,
+      image: img3,
       brand: "DairyPure3",
     },
   ]);
@@ -171,38 +173,29 @@ const Products = () => {
           </div>
         ) : viewMode === "grid" ? (
           /* Grid View - Responsive */
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-12 gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-8 2xl:grid-cols-8 gap-2">
             {scannedProducts.map((product) => (
               <button
                 key={product.id}
                 type="button"
-                className="group p-3 border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-md transition-all text-left"
+                className="group p-3 border border-gray-200 rounded-lg hover:border-blue-300 hover:shadow-md transition-all text-left flex flex-col items-start"
                 aria-label={`Add ${product.name} to cart`}
               >
                 {/* Product Image Placeholder */}
                 <div className="w-full aspect-square bg-gray-100 rounded-md mb-2 flex items-center justify-center group-hover:bg-blue-50 transition-colors">
-                  <svg
-                    className="w-8 h-8 text-gray-300 group-hover:text-blue-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-                    />
-                  </svg>
+                 <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover object-center rounded-md"
+                  />
                 </div>
 
                 {/* Product Info */}
-                <div>
+                <div className="w-full">
                   <p className="text-xs text-gray-500 mb-0.5">
                     {product.brand}
                   </p>
-                  <h4 className="text-sm font-medium text-gray-900 line-clamp-2 mb-1">
+                  <h4 className="text-sm font-medium text-gray-900 line-clamp-2 mb-1 min-h-[2.5rem]">
                     {product.name}
                   </h4>
                   <div className="flex items-center justify-between">
@@ -233,20 +226,11 @@ const Products = () => {
               >
                 {/* Product Image */}
                 <div className="w-12 h-12 bg-gray-100 rounded-md flex items-center justify-center flex-shrink-0">
-                  <svg
-                    className="w-6 h-6 text-gray-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
-                    />
-                  </svg>
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover object-center rounded-md"
+                  />
                 </div>
 
                 {/* Product Details */}
