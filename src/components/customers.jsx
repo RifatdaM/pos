@@ -161,11 +161,11 @@ const Customers = () => {
                 />
               </svg>
             </div>
-            <div className="absolute bottom-[36px] right-[10px] flex items-center pl-2.5 pointer-events-none">
+            <div className="absolute bottom-[36px] right-[10px] flex items-center pl-2.5">
               <button
                 type="button"
                 onClick={() => setShowModal(true)}
-                className="btn btn-primary h-7 px-2 text-xs"
+                className="btn btn-primary h-7 px-2 text-xs pointer-events-auto"
                 aria-label="Add new customer"
               >
                 <svg
